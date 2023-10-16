@@ -1,8 +1,9 @@
 package edu.ucsb.ece150.pickture;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.View;
+//import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,17 +17,21 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class ProfileActivity extends AppCompatActivity {
 
+    private static final String PREFERENCES_KEY = "MyPreferences";
+    private static final String IMAGE_RESOURCE_KEY = "imageResource";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        final ImageView exampleImage = (ImageView) this.findViewById(R.id.exampleImageView);
-        exampleImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // [TODO] Implement application behavior when the user clicks the profile picture
-            }
+//        final ImageView exampleImage = (ImageView) this.findViewById(R.id.exampleImageView);
+        int imageResource = getIntent().getIntExtra("imageResource", R.drawable.pic0);
+        ImageView imageView = findViewById(R.id.exampleImageView);
+        imageView.setImageResource(imageResource);
+
+        imageView.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, GalleryActivity.class);
+            startActivity(intent);
         });
     }
 
