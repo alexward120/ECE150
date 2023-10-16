@@ -2,11 +2,8 @@ package edu.ucsb.ece150.pickture;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-//import android.media.Image;
 import android.os.Bundle;
-//import android.view.View;
 import android.widget.ImageView;
-import android.util.Log;
 
 public class GalleryActivity extends AppCompatActivity {
     int[] images_id = {R.id.img0, R.id.img1, R.id.img2, R.id.img3,
