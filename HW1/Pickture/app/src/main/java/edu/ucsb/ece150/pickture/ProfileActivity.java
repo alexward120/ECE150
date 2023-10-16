@@ -23,7 +23,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        ImageView imageView = (ImageView) this.findViewById(R.id.exampleImageView);
+        ImageView imageView = this.findViewById(R.id.exampleImageView);
 
         imageView.setOnClickListener(v -> {
             Intent intent = new Intent(ProfileActivity.this, GalleryActivity.class);
@@ -36,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onPause();
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_KEY, MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        ImageView imageView = (ImageView) this.findViewById(R.id.exampleImageView);
+        ImageView imageView = this.findViewById(R.id.exampleImageView);
         String currentImageTag = (String) imageView.getTag();
         int currentImageResource = Integer.parseInt(currentImageTag);
         editor.putInt(IMAGE_RESOURCE_KEY, currentImageResource);
@@ -46,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ImageView imageView = (ImageView) this.findViewById(R.id.exampleImageView);
+        ImageView imageView = this.findViewById(R.id.exampleImageView);
         int imageResource = getIntent().getIntExtra("imageResource", -1);
         if (imageResource == -1) {
             SharedPreferences preferences = getSharedPreferences(PREFERENCES_KEY, MODE_PRIVATE);
