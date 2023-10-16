@@ -1,11 +1,14 @@
 package edu.ucsb.ece150.pickture;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.media.Image;
 import android.os.Bundle;
 //import android.view.View;
+import android.view.View;
 import android.widget.ImageView;
-
+import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 /*
@@ -24,22 +27,37 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-//        final ImageView exampleImage = (ImageView) this.findViewById(R.id.exampleImageView);
-        int imageResource = getIntent().getIntExtra("imageResource", R.drawable.pic0);
-        ImageView imageView = findViewById(R.id.exampleImageView);
-        imageView.setImageResource(imageResource);
+        int imageResource = getIntent().getIntExtra("imageResource", -1);
+        //Log.d("Image Resource", "Got " + imageResource);
+        if (imageResource == -1) {
+            SharedPreferences preferences = getSharedPreferences(PREFERENCES_KEY, MODE_PRIVATE);
+            imageResource = preferences.getInt(IMAGE_RESOURCE_KEY, R.drawable.pic0);
+        }
 
-        imageView.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, GalleryActivity.class);
-            startActivity(intent);
+        ImageView imageView = (ImageView) this.findViewById(R.id.exampleImageView);
+        imageView.setImageResource(imageResource);
+        int finalImageResource = imageResource;
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, GalleryActivity.class);
+                startActivity(intent);
+            }
         });
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
-        // [TODO] Hint: You will need this for implementing graceful app shutdown
+        SharedPreferences preferences = getSharedPreferences(PREFERENCES_KEY, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        int currentImageResource = getIntent().getIntExtra("imageResource", -1);
+        if (currentImageResource == -1) {
+            currentImageResource = R.drawable.pic0;
+        }
+        Log.d("On pause", "inserting val as currentIMgResource" + currentImageResource);
+        editor.putInt(IMAGE_RESOURCE_KEY, currentImageResource);
+        editor.apply();
     }
 
     @Override
