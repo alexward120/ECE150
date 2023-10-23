@@ -3,6 +3,7 @@ package edu.ucsb.ece150.gauchopay;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.net.URL;
 
 public class ReadWebServer extends AsyncTask<String, String, String> {
 
-    private static final String myUserID = ""; // [TODO] Fill in your ID. Your PERM number is ideal since it is a unique code that only you have access to.
+    private static final String myUserID = "8651135"; // [TODO] Fill in your ID. Your PERM number is ideal since it is a unique code that only you have access to.
     private static final String requestURL = "http://android.bryanparmenter.com/payment_listen.php?id=" + myUserID;
 
     private URL urlObject;
@@ -69,6 +70,8 @@ public class ReadWebServer extends AsyncTask<String, String, String> {
 
             // [TODO] A response was received from the server. Notify the user to select a card
             // for sending to the web server. (Maybe a Toast)
+            Context context = callingContext.get();
+            Toast.makeText(context, "Select a card to send to the web server", Toast.LENGTH_LONG).show();
         }
     }
 

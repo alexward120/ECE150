@@ -16,10 +16,19 @@
 
     <com.braintreepayments.cardform.view.CardForm
         android:id="@+id/card_form"
+        android:imeOptions="actionGo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginRight="16dp" />
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit_card"
+        app:layout_anchor="@id/toolbar"
+        app:layout_anchorGravity="end|center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

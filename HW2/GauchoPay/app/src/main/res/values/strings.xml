@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GauchoPay</string>
+    <string name="submit_card">Submit Card</string>
 </resources>
