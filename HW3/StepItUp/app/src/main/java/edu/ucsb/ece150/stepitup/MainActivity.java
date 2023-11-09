@@ -17,6 +17,7 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private float stepsPerHour = 0;
     private long lastStepTime = 0;
     private static final int MIN_STEP_INTERVAL = 500;
+    private static boolean goalsCompletedFlag = false;
 
     Handler handler = new Handler();
     Runnable thread = new Runnable() {
@@ -58,10 +60,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         saveButton.setOnClickListener(v -> {
             // Save step goal
             stepGoalsFinalValue = Float.parseFloat(((TextView) findViewById(R.id.StepGoal)).getText().toString());
+            STEP_GOAL = stepGoalsFinalValue;
             SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("Step_Goal_Final_Val", String.valueOf(stepGoalsFinalValue));
             editor.apply();
+            Toast.makeText(getApplicationContext(), "Step goal saved!", Toast.LENGTH_SHORT).show();
         });
 
         Button restartButton = findViewById(R.id.restartButton);
@@ -98,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         String goalsCompletedString = sharedPref.getString("GoalsCompleted", "0");
         goalsCompleted = Float.parseFloat(goalsCompletedString);
         goalsComplete.setText(String.format("%.0f", goalsCompleted));
+
+        goalsCompletedFlag = sharedPref.getBoolean("Flag", false);
 
         String startTimeString = sharedPref.getString("StartTime", "0");
         if (!startTimeString.equals("0")) {
@@ -190,14 +196,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (STEP_GOAL > 0) {
             TextView totalSteps = findViewById(R.id.StepGoal);
             totalSteps.setText(String.format("%.0f", STEP_GOAL));
+            goalsCompletedFlag = false;
         } else {
-            sendNotification("You have reached your step goal!");
-            SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-            STEP_GOAL = Float.parseFloat(sharedPref.getString("Step_Goal_Final_Val", "0")); // Default value
-            ((TextView) findViewById(R.id.StepGoal)).setText(String.format("%.0f", STEP_GOAL)); // Update UI
-            goalsCompleted++;
-            TextView goalsComplete = findViewById(R.id.goalscompletedval);
-            goalsComplete.setText(String.format("%.0f", goalsCompleted));
+            if (!goalsCompletedFlag) { // Prevents multiple notifications for a single goal
+                TextView totalSteps = findViewById(R.id.StepGoal);
+                totalSteps.setText(String.format("%.0f", STEP_GOAL));
+                sendNotification("You have reached your step goal!");
+                goalsCompleted++;
+                TextView goalsComplete = findViewById(R.id.goalscompletedval);
+                goalsComplete.setText(String.format("%.0f", goalsCompleted));
+                goalsCompletedFlag = true;
+
+            }
+
         }
     }
 
@@ -212,6 +223,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         editor.putString("StepsPerHour", String.valueOf(stepsPerHour));
         editor.putString("GoalsCompleted", String.valueOf(goalsCompleted));
         editor.putString("StartTime", String.valueOf(startTime));
+        editor.putBoolean("Flag", goalsCompletedFlag);
         editor.apply();
     }
 }
