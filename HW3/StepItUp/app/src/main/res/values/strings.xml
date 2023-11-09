@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">StepItUp</string>
+    <string name="save">Save</string>
+    <string name="restart">Restart</string>
+    <string name="built_in_step_counter">Built-in Step Counter: </string>
+    <string name="total_steps">Total Steps: </string>
+    <string name="steps_hr">Steps/hr: </string>
+    <string name="goals_completed">Goals Completed: </string>
+</resources>

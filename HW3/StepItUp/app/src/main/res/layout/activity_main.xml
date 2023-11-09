@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/totalStepVal"
+        android:layout_width="100dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/app_name"
+        app:layout_constraintStart_toEndOf="@+id/textViewTotalSteps"
+        app:layout_constraintTop_toBottomOf="@+id/BuiltInVal" />
+
+    <TextView
+        android:id="@+id/stepshrval"
+        android:layout_width="100dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/app_name"
+        app:layout_constraintStart_toEndOf="@+id/textViewStepsHr"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTotalSteps" />
+
+    <TextView
+        android:id="@+id/goalscompletedval"
+        android:layout_width="100dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/app_name"
+        app:layout_constraintStart_toEndOf="@+id/textViewGoalsCompleted"
+        app:layout_constraintTop_toBottomOf="@+id/stepshrval" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="100dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/save"
+        app:layout_constraintEnd_toStartOf="@+id/restartButton"
+        app:layout_constraintStart_toEndOf="@+id/StepGoal"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <Button
+        android:id="@+id/restartButton"
+        android:layout_width="100dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/restart"
+        app:layout_constraintStart_toEndOf="@+id/saveButton"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <EditText
+        android:id="@+id/StepGoal"
+        android:layout_width="140dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/textViewBuiltInStepCounter"
+        android:layout_width="140dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/built_in_step_counter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StepGoal" />
+
+    <TextView
+        android:id="@+id/textViewTotalSteps"
+        android:layout_width="140dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/total_steps"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBuiltInStepCounter" />
+
+    <TextView
+        android:id="@+id/textViewStepsHr"
+        android:layout_width="140dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/steps_hr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTotalSteps" />
+
+    <TextView
+        android:id="@+id/textViewGoalsCompleted"
+        android:layout_width="140dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/goals_completed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewStepsHr" />
+
+    <TextView
+        android:id="@+id/BuiltInVal"
+        android:layout_width="100dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/app_name"
+        app:layout_constraintStart_toEndOf="@+id/textViewBuiltInStepCounter"
+        app:layout_constraintTop_toBottomOf="@+id/StepGoal" />
+</androidx.constraintlayout.widget.ConstraintLayout>
